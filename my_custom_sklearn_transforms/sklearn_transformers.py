@@ -14,3 +14,14 @@ class DropColumns(BaseEstimator, TransformerMixin):
         data = X.copy()
         # Retornamos um novo dataframe sem as colunas indesejadas
         return data.drop(labels=self.columns, axis='columns')
+
+class EncodeCategoricalData(BaseEstimator, TransformerMixin):
+    def __init__(self, categorical_map):
+        self.categorical_map = categorical_map
+        
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+        data = X.copy()
+        return data.replace(self.categorical_map)
